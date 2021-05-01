@@ -1,0 +1,2 @@
+# boldrevival
+dJango implementation
