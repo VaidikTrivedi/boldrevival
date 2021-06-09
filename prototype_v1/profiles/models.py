@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -18,12 +19,14 @@ class Volunteer(models.Model):
                 ('private job', 'Private Job'),
                 ('goverment job', 'Goverment Job'),                               
                 )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=12, null=True)
     email = models.CharField(max_length=50, null=True)
     education = models.CharField(max_length=100, null=True, choices=EDUCATION)
     occupation = models.CharField(max_length=100, null=True, choices=OCCUPATION)
-    date_created = models.TimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -35,11 +38,13 @@ class Organization(models.Model):
              ('public sector', 'Public Sector'),
              ('third sector', 'Third Sector'),
              )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=15,null=True)
     email = models.CharField(max_length=50, null=True)
     sector = models.CharField(max_length=100, null=True, choices=SECTOR)
-    date_created = models.TimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -49,11 +54,13 @@ class Investor(models.Model):
             ('type1', 'Type1'),
             ('type2', 'Type2'),
             )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, null=True)
     phone = models.CharField(max_length=15,null=True)
     email = models.CharField(max_length=50, null=True)
     types = models.CharField(max_length=100, null=True, choices=TYPES)
-    date_created = models.TimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
     def __str__(self):
         return self.name
